@@ -1,10 +1,12 @@
-import { useRef, useState } from "react";
+import React from "react";
+
 import "./App.css";
+import MainPage from "./pages/main/mainPage";
 
 function App() {
   return (
     <div className="App">
-      <div>hehe</div>
+      <MainPage></MainPage>
     </div>
   );
 }
