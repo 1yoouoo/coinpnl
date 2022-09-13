@@ -1,42 +1,62 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import "./editorPage.css";
+import ItemEditor from "./itemEditor";
+
+// + 누르면 새로운 편집창이 뜨도록 하고싶다
 
 const EditorPage = () => {
-  // 1. list loop -> <div>
-  // 2. add item
-  const itemList = [
-    {
-      id: "1",
-      desc: "asd",
-    },
-    {
-      id: "2",
-      desc: "asd",
-    },
-    {
-      id: "3",
-      desc: "asd",
-    },
-    {
-      id: "4",
-      desc: "asd",
-    },
-  ];
-  const [list, setList] = useState(itemList);
-  // const list = List<Item>()
+  let itemList = [];
+  // const createdDate = new Date().getTime();
+  const [listByReact, setListByReact] = useState(itemList);
+  const [state, setState] = React.useState({
+    firstName: "",
+    lastName: "",
+  });
+
   const addsomething = () => {
-    // add item
-    // list.add(item)
+    setListByReact([
+      ...listByReact,
+      { id: listByReact.length + 1, desc: "new" },
+    ]);
   };
+  const handlesubmit = () => {
+    console.log("aaa", state.firstName, state.lastName);
+  };
+
+  function handleInputChange(evt) {
+    setState({ ...state, [evt.target.name]: evt.target.value });
+  }
+
   return (
     <div>
-      <div>screenshot</div>
+      <button className="Screenshot">Screenshot</button>
 
       <div>
-        {list.map((item) => {
-          return <div key={item.id}>item = {item.desc}</div>;
+        {listByReact.map((item) => {
+          return (
+            <div key={item.id}>
+              {/* {item.id} TRY =({item.createdDate}, {item.desc}) */}
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="firstName"
+                  value={state.firstName}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="lastName"
+                  value={state.lastName}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <button onClick={handlesubmit}>*</button>
+            </div>
+          );
         })}
 
-        <div onClick={addsomething}>add</div>
+        <button onClick={addsomething}>+</button>
       </div>
     </div>
   );
