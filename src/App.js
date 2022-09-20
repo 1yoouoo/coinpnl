@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-
 import "./App.css";
 import MainPage from "./pages/main/mainPage";
 import EditorPage from "./pages/editor/editorPage";

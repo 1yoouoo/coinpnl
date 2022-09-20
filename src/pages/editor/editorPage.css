@@ -1,4 +1,58 @@
+/* Screenshot */
+
 .Screenshot {
-  width: 300px;
-  height: 300px;
+  text-align: center;
+}
+
+.Screenshot button {
+  width: 600px;
+  height: 400px;
+}
+
+/* Table */
+
+.Table {
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+}
+
+.Table table {
+  margin: auto;
+  width: 600px;
+  padding: 5px;
+  border: 1px solid #444444;
+  border-collapse: collapse;
+}
+
+.Table table th,
+td {
+  border: black 1px solid;
+  padding: 6px;
+}
+
+.Table table th:nth-child(1) {
+  width: 10%;
+}
+.Table table th:nth-child(2) {
+  width: 20%;
+}
+.Table table th:nth-child(3) {
+  width: 15%;
+}
+.Table table th:nth-child(4) {
+  width: 45%;
+}
+.Table table th:nth-child(5) {
+  width: 10%;
+}
+
+/* AddButton */
+
+.AddButton {
+  text-align: center;
+}
+
+.AddButton button {
+  width: 60px;
 }

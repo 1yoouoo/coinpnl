@@ -1,62 +1,69 @@
-import React, { useState } from "react";
+import React, { setState, useState } from "react";
 import "./editorPage.css";
 import ItemEditor from "./itemEditor";
 
-// + 누르면 새로운 편집창이 뜨도록 하고싶다
-
 const EditorPage = () => {
-  let itemList = [];
-  // const createdDate = new Date().getTime();
-  const [listByReact, setListByReact] = useState(itemList);
-  const [state, setState] = React.useState({
-    firstName: "",
-    lastName: "",
+  const [state, setState] = useState({
+    rows: [
+      {
+        진입가격: "",
+        PERCENTAGE: "",
+        진입근거: "",
+      },
+    ],
   });
 
-  const addsomething = () => {
-    setListByReact([
-      ...listByReact,
-      { id: listByReact.length + 1, desc: "new" },
-    ]);
+  const handleAddRow = () => {
+    const tableItem = {
+      진입가격: "",
+      PERCENTAGE: "",
+      진입근거: "",
+    };
+    setState({
+      rows: [...state.rows, tableItem],
+    });
   };
-  const handlesubmit = () => {
-    console.log("aaa", state.firstName, state.lastName);
-  };
-
-  function handleInputChange(evt) {
-    setState({ ...state, [evt.target.name]: evt.target.value });
-  }
 
   return (
     <div>
-      <button className="Screenshot">Screenshot</button>
+      <div className="Screenshot">
+        <button>Screenshot</button>
+      </div>
 
-      <div>
-        {listByReact.map((item) => {
-          return (
-            <div key={item.id}>
-              {/* {item.id} TRY =({item.createdDate}, {item.desc}) */}
-              <label>
-                Name:
-                <input
-                  type="text"
-                  name="firstName"
-                  value={state.firstName}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  value={state.lastName}
-                  onChange={handleInputChange}
-                />
-              </label>
-              <button onClick={handlesubmit}>*</button>
-            </div>
-          );
-        })}
-
-        <button onClick={addsomething}>+</button>
+      <div className="Table">
+        <table>
+          <thead>
+            <tr>
+              <th>TRY</th>
+              <th>진입가격</th>
+              <th>PERCENTAGE</th>
+              <th>진입근거</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {state.rows.map((item, idx) => (
+              <tr key={idx}>
+                <td>{idx + 1}TRY</td>
+                <td>
+                  <input type="text" name="asd" />
+                </td>
+                <td>
+                  <input />
+                </td>
+                <td>
+                  <input />
+                </td>
+                <td>
+                  <button>저장</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="AddButton">
+        <button onClick={handleAddRow}>+</button>
       </div>
     </div>
   );
