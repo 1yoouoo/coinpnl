@@ -1,46 +1,46 @@
-import React, { setState, useRef, useState } from "react";
+import React, { setRows, useRef, useState } from "react";
 import "./editorPage.css";
 import ItemEditor from "./itemEditor";
+
+// 1. state { rows } ? vs rows
+// 2. rows 1개만 가정한 코드
 
 const EditorPage = ({ onCreate }) => {
   const entrypriceInput = useRef();
   const percentageInput = useRef();
   const explanationInput = useRef();
-  const [state, setState] = useState({
-    rows: [
-      {
-        entryPrice: "",
-        percentage: "",
-        explanation: "",
-      },
-    ],
-  });
+
+  const [rows, setRows] = useState([
+    {
+      entryPrice: "",
+      percentage: "",
+      explanation: "",
+    },
+  ]);
 
   const handleChangeState = (e) => {
-    console.log("<<<<<", state);
+    console.log("<<<<<", rows);
     // console.log({ ...state, [e.target.name]: e.target.value })
-    // setState({ ...state, [e.target.name]: e.target.value });
-    setState({
-      rows: [
-        {
-          ...state.rows[0],
-          [e.target.name]: e.target.value,
-        },
-      ],
-    });
-    console.log(">>>>>>>>>", state);
+    // setRows({ ...state, [e.target.name]: e.target.value });
+    setRows([
+      {
+        ...rows[0],
+        [e.target.name]: e.target.value,
+      },
+    ]);
+    console.log(">>>>>>>>>", rows);
   };
 
   const handleSubmit = () => {
-    if (state.rows[0]["entryPrice"].length < 4) {
+    if (rows[0]["entryPrice"].length < 4) {
       entrypriceInput.current.focus();
       return;
     }
-    if (state.rows[0]["percentage"].length < 2) {
+    if (rows[0]["percentage"].length < 2) {
       percentageInput.current.focus();
       return;
     }
-    if (state.rows[0]["explanation"].length < 2) {
+    if (rows[0]["explanation"].length < 2) {
       explanationInput.current.focus();
       return;
     }
@@ -49,16 +49,14 @@ const EditorPage = ({ onCreate }) => {
     //   state.rows[0]["percentage"],
     //   state.rows[0]["explanation"]
     // );
-    console.log("save!!!", state.rows);
-    setState({
-      rows: [
-        {
-          entryPrice: "",
-          percentage: "",
-          explanation: "",
-        },
-      ],
-    });
+    console.log("save!!!", rows);
+    setRows([
+      {
+        entryPrice: "",
+        percentage: "",
+        explanation: "",
+      },
+    ]);
 
     alert("저장 성공!");
   };
@@ -68,9 +66,7 @@ const EditorPage = ({ onCreate }) => {
       percentage: "",
       explanation: "",
     };
-    setState({
-      rows: [...state.rows, tableItem],
-    });
+    setRows([...rows, tableItem]);
   };
 
   return (
@@ -91,7 +87,7 @@ const EditorPage = ({ onCreate }) => {
             </tr>
           </thead>
           <tbody>
-            {state.rows.map((item, idx) => (
+            {rows.map((item, idx) => (
               <tr key={idx}>
                 <td>{idx + 1}TRY</td>
                 <td>
@@ -99,7 +95,7 @@ const EditorPage = ({ onCreate }) => {
                     ref={entrypriceInput}
                     type="text"
                     name="entryPrice"
-                    value={state.rows[0]["entryPrice"]}
+                    value={rows[0]["entryPrice"]}
                     className="entryprice"
                     onChange={handleChangeState}
                   />
@@ -109,7 +105,7 @@ const EditorPage = ({ onCreate }) => {
                     ref={percentageInput}
                     type="text"
                     name="percentage"
-                    value={state.rows[0]["percentage"]}
+                    value={rows[0]["percentage"]}
                     className="percentage"
                     onChange={handleChangeState}
                   />
@@ -119,7 +115,7 @@ const EditorPage = ({ onCreate }) => {
                     ref={explanationInput}
                     type="text"
                     name="explanation"
-                    value={state.rows[0]["explanation"]}
+                    value={rows[0]["explanation"]}
                     className="explanation"
                     onChange={handleChangeState}
                   />
