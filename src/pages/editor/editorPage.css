@@ -47,6 +47,22 @@ td {
   width: 10%;
 }
 
+.Table table .entryprice {
+  width: 90px;
+  border-radius: 5px;
+  border: rgba(83, 83, 83, 0.359) 1px solid;
+}
+.Table table .percentage {
+  width: 80px;
+  border-radius: 5px;
+  border: rgba(83, 83, 83, 0.359) 1px solid;
+}
+.Table table .explanation {
+  width: 190px;
+  border-radius: 5px;
+  border: rgba(83, 83, 83, 0.359) 1px solid;
+}
+
 /* AddButton */
 
 .AddButton {
