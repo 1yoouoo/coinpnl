@@ -23,36 +23,14 @@ const EditorPage = ({ onCreate }) => {
   ]);
 
   const handleChangeState = (e, idx) => {
-    console.log("<<<<<", rows);
-    // console.log({ ...state, [e.target.name]: e.target.value })
-    // setRows({ ...state, [e.target.name]: e.target.value });
-    // row_idx = idx
-    // if(row_idx = 1) rows[0] update
-    // if(row_idx = 2) rows[1] update
-    console.log("godododododo", idx);
-    if (idx == 0) {
-      setRows([
-        {
-          ...rows[0],
-          [e.target.name]: e.target.value,
-        },
-        {
-          ...rows[1],
-        },
-      ]);
+    let tmp_rows = [...rows];
+    for (let tmp_rows_idx = 0; tmp_rows_idx < tmp_rows.length; tmp_rows_idx++) {
+      console.log(tmp_rows_idx, tmp_rows[tmp_rows_idx]);
+      if (tmp_rows_idx == idx) {
+        tmp_rows[tmp_rows_idx][e.target.name] = e.target.value;
+      }
     }
-    if (idx == 1) {
-      setRows([
-        {
-          ...rows[0],
-        },
-        {
-          ...rows[1],
-          [e.target.name]: e.target.value,
-        },
-      ]);
-    }
-    console.log(">>>>>>>>>", rows);
+    setRows(tmp_rows);
   };
 
   const handleSubmit = () => {
