@@ -2,7 +2,6 @@ import React, { setRows, useRef, useState } from "react";
 import "./editorPage.css";
 import ItemEditor from "./itemEditor";
 
-// 1. state { rows } ? vs rows
 // 2. rows 1개만 가정한 코드
 
 const EditorPage = ({ onCreate }) => {
@@ -12,22 +11,47 @@ const EditorPage = ({ onCreate }) => {
 
   const [rows, setRows] = useState([
     {
-      entryPrice: "",
-      percentage: "",
-      explanation: "",
+      entryPrice: "as",
+      percentage: "asss",
+      explanation: "aada",
+    },
+    {
+      entryPrice: "1123",
+      percentage: "123144",
+      explanation: "132213",
     },
   ]);
 
-  const handleChangeState = (e) => {
+  const handleChangeState = (e, idx) => {
     console.log("<<<<<", rows);
     // console.log({ ...state, [e.target.name]: e.target.value })
     // setRows({ ...state, [e.target.name]: e.target.value });
-    setRows([
-      {
-        ...rows[0],
-        [e.target.name]: e.target.value,
-      },
-    ]);
+    // row_idx = idx
+    // if(row_idx = 1) rows[0] update
+    // if(row_idx = 2) rows[1] update
+    console.log("godododododo", idx);
+    if (idx == 0) {
+      setRows([
+        {
+          ...rows[0],
+          [e.target.name]: e.target.value,
+        },
+        {
+          ...rows[1],
+        },
+      ]);
+    }
+    if (idx == 1) {
+      setRows([
+        {
+          ...rows[0],
+        },
+        {
+          ...rows[1],
+          [e.target.name]: e.target.value,
+        },
+      ]);
+    }
     console.log(">>>>>>>>>", rows);
   };
 
@@ -95,9 +119,9 @@ const EditorPage = ({ onCreate }) => {
                     ref={entrypriceInput}
                     type="text"
                     name="entryPrice"
-                    value={rows[0]["entryPrice"]}
+                    value={rows[idx]["entryPrice"]}
                     className="entryprice"
-                    onChange={handleChangeState}
+                    onChange={(e) => handleChangeState(e, idx)}
                   />
                 </td>
                 <td>
@@ -105,9 +129,9 @@ const EditorPage = ({ onCreate }) => {
                     ref={percentageInput}
                     type="text"
                     name="percentage"
-                    value={rows[0]["percentage"]}
+                    value={rows[idx]["percentage"]}
                     className="percentage"
-                    onChange={handleChangeState}
+                    onChange={(e) => handleChangeState(e, idx)}
                   />
                 </td>
                 <td>
@@ -115,9 +139,9 @@ const EditorPage = ({ onCreate }) => {
                     ref={explanationInput}
                     type="text"
                     name="explanation"
-                    value={rows[0]["explanation"]}
+                    value={rows[idx]["explanation"]}
                     className="explanation"
-                    onChange={handleChangeState}
+                    onChange={(e) => handleChangeState(e, idx)}
                   />
                 </td>
                 <td>
