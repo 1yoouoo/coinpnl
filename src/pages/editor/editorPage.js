@@ -2,8 +2,6 @@ import React, { setRows, useRef, useState } from "react";
 import "./editorPage.css";
 import ItemEditor from "./itemEditor";
 
-// 2. rows 1개만 가정한 코드
-
 const EditorPage = ({ onCreate }) => {
   const entrypriceInput = useRef();
   const percentageInput = useRef();
@@ -11,16 +9,13 @@ const EditorPage = ({ onCreate }) => {
 
   const [rows, setRows] = useState([
     {
-      entryPrice: "as",
-      percentage: "asss",
-      explanation: "aada",
-    },
-    {
-      entryPrice: "1123",
-      percentage: "123144",
-      explanation: "132213",
+      entryPrice: "",
+      percentage: "",
+      explanation: "",
     },
   ]);
+
+  const [iseditable, setIseditable] = useState(true);
 
   const handleChangeState = (e, idx) => {
     let tmp_rows = [...rows];
@@ -32,6 +27,7 @@ const EditorPage = ({ onCreate }) => {
     }
     setRows(tmp_rows);
   };
+  const [buttonText, setButtonText] = useState("Save");
 
   const handleSubmit = () => {
     if (rows[0]["entryPrice"].length < 4) {
@@ -46,22 +42,22 @@ const EditorPage = ({ onCreate }) => {
       explanationInput.current.focus();
       return;
     }
-    // onCreate(
-    //   state.rows[0]["entryPrice"],
-    //   state.rows[0]["percentage"],
-    //   state.rows[0]["explanation"]
-    // );
+
     console.log("save!!!", rows);
     setRows([
       {
-        entryPrice: "",
-        percentage: "",
-        explanation: "",
+        entryPrice: rows[0]["entryPrice"],
+        percentage: rows[0]["percentage"],
+        explanation: rows[0]["explanation"],
       },
     ]);
 
+    setButtonText("Edit");
+
     alert("저장 성공!");
+    setIseditable(!iseditable);
   };
+
   const handleAddRow = () => {
     const tableItem = {
       entryPrice: "",
@@ -98,6 +94,7 @@ const EditorPage = ({ onCreate }) => {
                     type="text"
                     name="entryPrice"
                     value={rows[idx]["entryPrice"]}
+                    disabled={!iseditable}
                     className="entryprice"
                     onChange={(e) => handleChangeState(e, idx)}
                   />
@@ -123,7 +120,7 @@ const EditorPage = ({ onCreate }) => {
                   />
                 </td>
                 <td>
-                  <button onClick={handleSubmit}>저장</button>
+                  <button onClick={handleSubmit}>{buttonText}</button>
                 </td>
               </tr>
             ))}
