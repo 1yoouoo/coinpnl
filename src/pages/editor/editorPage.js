@@ -30,32 +30,37 @@ const EditorPage = ({ onCreate }) => {
   const [buttonText, setButtonText] = useState("Save");
 
   const handleSubmit = () => {
-    if (rows[0]["entryPrice"].length < 4) {
-      entrypriceInput.current.focus();
-      return;
-    }
-    if (rows[0]["percentage"].length < 2) {
-      percentageInput.current.focus();
-      return;
-    }
-    if (rows[0]["explanation"].length < 2) {
-      explanationInput.current.focus();
-      return;
-    }
+    if (iseditable == true) {
+      if (rows[0]["entryPrice"].length < 4) {
+        entrypriceInput.current.focus();
+        return;
+      }
+      if (rows[0]["percentage"].length < 2) {
+        percentageInput.current.focus();
+        return;
+      }
+      if (rows[0]["explanation"].length < 2) {
+        explanationInput.current.focus();
+        return;
+      }
 
-    console.log("save!!!", rows);
-    setRows([
-      {
-        entryPrice: rows[0]["entryPrice"],
-        percentage: rows[0]["percentage"],
-        explanation: rows[0]["explanation"],
-      },
-    ]);
+      console.log("save!!!", rows);
+      setRows([
+        {
+          entryPrice: rows[0]["entryPrice"],
+          percentage: rows[0]["percentage"],
+          explanation: rows[0]["explanation"],
+        },
+      ]);
 
-    setButtonText("Edit");
+      setButtonText("Edit");
 
-    alert("저장 성공!");
-    setIseditable(!iseditable);
+      alert("저장 성공!");
+      setIseditable(!iseditable);
+    } else {
+      setIseditable(!iseditable);
+      setButtonText("Save");
+    }
   };
 
   const handleAddRow = () => {
@@ -105,6 +110,7 @@ const EditorPage = ({ onCreate }) => {
                     type="text"
                     name="percentage"
                     value={rows[idx]["percentage"]}
+                    disabled={!iseditable}
                     className="percentage"
                     onChange={(e) => handleChangeState(e, idx)}
                   />
@@ -115,6 +121,7 @@ const EditorPage = ({ onCreate }) => {
                     type="text"
                     name="explanation"
                     value={rows[idx]["explanation"]}
+                    disabled={!iseditable}
                     className="explanation"
                     onChange={(e) => handleChangeState(e, idx)}
                   />
